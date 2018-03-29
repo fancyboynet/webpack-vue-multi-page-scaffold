@@ -1,15 +1,3 @@
-@font-face {
-  font-family: 'MyFont';
-  src: url('../../assert/font/iconfont.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-}
-
-body {
-  background: url("./bg.png") no-repeat;
-}
-
-h1 {
-  color: red;
-  font-family: 'MyFont';
+a{
+  color: red!important;
 }
