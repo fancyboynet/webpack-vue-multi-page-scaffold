@@ -71,29 +71,6 @@ module.exports = {
           }
         },
         exclude: /node_modules/
-      },
-      {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              js: [
-                {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: ['@babel/preset-env'],
-                    plugins: ['@babel/plugin-syntax-dynamic-import']
-                  }
-                }
-              ],
-              css: [
-                MiniCssExtractPlugin.loader,
-                'css-loader'
-              ]
-            }
-          }
-        }
       }
     ]
   }
