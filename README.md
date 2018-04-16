@@ -15,7 +15,7 @@
 
 ## todo (欢迎pr)
 1. 单元测试
-
+2. 热更新（暂时没找到`html-webpack-plugin`的热更新解决方案）
 ### 目录
 
 ```
@@ -40,6 +40,8 @@
 │   │    ├── style.css
 │   │    └── ...
 │   ├── home
+│
+├── widget // 模块目录
 │
 ├── test // 测试
 │
@@ -77,6 +79,22 @@ $ npm run build
 $ npm run new pageName
 ```
 
+## 从根目录引入模块
+目前默认把项目根目录加入到模块搜寻目录中
+`webpack.common.js`
+```js
+{
+  resolve: {
+      modules: [process.cwd(), "node_modules"]
+    }
+}
+
+```
+```js
+import moduleA from 'widget/a'
+import moduleB from 'widget/b'
+```
+
 ## 数据模拟
 `mock/router.js`下定义数据接口
 ```js
@@ -88,9 +106,23 @@ module.exports = function (app) {
   })
 }
 ```
+代理其他数据接口
+```js
+const request = require('request')
+module.exports = function (app) {
+  app.use('/api/', function(req, res) {
+    let url = `http://localhost:3000/api${req.url}`
+    req.pipe(request(url)).pipe(res)
+  })
+}
+
+```
 请求
 ```js
 axios.get('/data').then(data => {
   console.log(data)
 })
 ```
+
+## 单页应用
+1. Vue.js 请切换到vue分支

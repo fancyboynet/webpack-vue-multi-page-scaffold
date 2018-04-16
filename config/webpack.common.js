@@ -1,18 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 let entry = {}
-let plugins = [
-  new CleanWebpackPlugin('output', {
-    root: process.cwd()
-  }),
-  new webpack.NamedModulesPlugin(),
-  new webpack.HotModuleReplacementPlugin()
-]
+let plugins = []
 
 let pages = fs.readdirSync(path.join(__dirname, '../page'))
 
@@ -34,6 +26,7 @@ module.exports = {
   entry: entry,
   plugins: plugins,
   resolve: {
+    modules: [process.cwd(), "node_modules"],
     alias: {
       vue: 'vue/dist/vue.js'
     }
