@@ -1,44 +1,70 @@
-<style lang='scss'>
-  @import 'common/css/reset.scss';
-html, body, #app{
-  //height: 100%;
-}
-body{
-  background:#f4f5f9;
-  color: #1b1b1b;
-}
-
-.app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div style="position: absolute;top: 0;left:0;right:0;bottom:0;">
+        <transition :name="transitionName">
+            <keep-alive>
+                <router-view class="child-view" v-if="$route.meta.keepAlive"></router-view>
+            </keep-alive>
+        </transition>
+        <transition :name="transitionName">
+            <router-view class="child-view" v-if="!$route.meta.keepAlive"></router-view>
+        </transition>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data(){
-    return {
+  import Vue from 'vue'
+  import VueRouter from 'vue-router'
+  import ROUTES from './routes'
 
+  Vue.use(VueRouter)
+
+  const router = new VueRouter({
+    routes: ROUTES
+  })
+
+  export default {
+    router,
+    data () {
+      return {
+        transitionName: 'slide-left'
+      }
     }
-  },
-  methods:{
-
-  },
-  mounted(){
-
   }
 
-}
 </script>
 
+<style>
+    /*路由过渡动画*/
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .5s ease;
+    }
 
+    .fade-enter,
+    .fade-leave-active {
+        opacity: 0
+    }
+
+    .child-view {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: all .5s cubic-bezier(.55, 0, .1, 1);
+        background: white;
+    }
+
+    .slide-left-enter,
+    .slide-right-leave-active {
+        opacity: 0;
+        transform: translate(30px, 0);
+    }
+
+    .slide-left-leave-active,
+    .slide-right-enter {
+        opacity: 0;
+        transform: translate(-30px, 0);
+    }
+
+</style>
