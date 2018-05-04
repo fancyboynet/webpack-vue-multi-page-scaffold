@@ -1,0 +1,29 @@
+$--button-warning-border: #ffd40a;
+$--button-warning-fill: #ffd40a;
+$--button-warning-color: #1b1b1b;
+$--color-primary: #405b84;
+$--button-info-border: $--color-primary;
+$--button-info-fill: $--color-primary;
+
+
+$--button-medium-padding-vertical: 13px;
+$--button-medium-padding-horizontal: 39px;
+$--button-small-padding-vertical: 7px;
+$--button-small-padding-horizontal: 20px;
+$--button-mini-padding-vertical: 5px;
+$--button-mini-padding-horizontal: 9px;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '../../../node_modules/element-ui/lib/theme-chalk/fonts';
+@import "../../../node_modules/element-ui/packages/theme-chalk/src/index";
+
+.el-button.is-plain{
+  background-color: #fff;
+}
+.el-pagination{
+  padding: 20px 0;
+  text-align: center;
+}
+.el-input__inner{
+  border-radius: 0;
+}

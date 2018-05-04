@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文章模板</title>
+</head>
+<body>
+	<div class="article" id="article">
+		
+	</div>
+	<script>
+	
+
+	window.onload = function(){
+		if(sessionStorage && sessionStorage.message){
+			document.getElementById('article').innerHTML = sessionStorage.message
+		}else{
+			window.opener.postMessage('success', location.protocol+'//'+location.host)
+			window.opener = null
+		}
+		window.addEventListener('message',function(event){
+			sessionStorage.message = event.data
+			console.log(123)
+			document.getElementById('article').innerHTML = sessionStorage.message
+		})
+	}
+
+		
+	</script>
+</body>
+</html>

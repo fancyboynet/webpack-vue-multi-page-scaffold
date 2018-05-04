@@ -1,5 +1,19 @@
 {
   "outputName": "dist",
+  "staticName": "static",
+  "templateName": "view",
   "host": "localhost",
-  "port": 8081
+  "port": 8081,
+  "production": {
+    "server": "http://10.0.2.121:8090/",
+    "api": "http://10.0.2.121:8090/"
+  },
+  "testing": {
+    "server": "http://10.0.2.121:8090/",
+    "api": "http://10.0.2.121:8090"
+  },
+  "development": {
+    "server": "http://10.0.2.121:8090/",
+    "api": "/api"
+  }
 }

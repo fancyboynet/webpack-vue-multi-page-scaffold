@@ -56,6 +56,8 @@
 ├── mock // 数据模拟
 │       └── router.js
 │
+├── static // 非模块话资源，直接拷贝
+│
 ├── test // 测试
 │
 ├── node_modules // 生态

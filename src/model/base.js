@@ -1,3 +1,4 @@
+import {LANG as LANG_CONFIG} from 'config/lang'
 export default class Base {
   constructor (data = {}, map = {}) {
     this.__map__ = map
@@ -37,3 +38,27 @@ export default class Base {
     return data
   }
 }
+
+export const ROLE = {
+  ADMIN: {
+    CODE: 1,
+    TEXT: '管理员'
+  },
+  AUTHOR: {
+    CODE: 2,
+    TEXT: '作者'
+  }
+}
+
+export const AUTH = {
+  ADMIN: {
+    CODE: 1,
+    TEXT: '管理员'
+  },
+  AUTHOR: {
+    CODE: 2,
+    TEXT: '作者'
+  }
+}
+
+export const LANG = LANG_CONFIG

@@ -1,0 +1,11 @@
+{
+    "production": {
+        "api": "http://10.0.2.121:8090"
+    },
+    "development": {
+        "api": "/api"
+    },
+    "preview":{
+        "api": "http://10.0.2.121:8091"
+    }
+}

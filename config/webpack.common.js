@@ -3,11 +3,15 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const buildConfig = require('./build')
 const isDevMode = process.env.NODE_ENV !== 'production'
 let srcRoot = path.join(process.cwd(), './src')
 let pageRoot = path.join(srcRoot, './page')
 let entry = {}
-let plugins = []
+let plugins = [
+  new CopyWebpackPlugin([ { from: path.join(srcRoot, './static'), to: `${buildConfig.staticName}` } ])
+]
 
 let pages = fs.readdirSync(pageRoot)
 
@@ -20,7 +24,7 @@ pages.map((v, i) => {
   entry[v] = `${pageRoot}/${v}/index.js`
   plugins.push(new HtmlWebpackPlugin({
     chunks: ['runtime', 'common', v],
-    filename: `${v}.html`,
+    filename: isDevMode ? `${v}.html` : `${buildConfig.templateName}/${v}.html`,
     template: `${pageRoot}/${v}/index.html`
   }))
 })
@@ -29,22 +33,24 @@ module.exports = {
   plugins: plugins,
   resolve: {
     modules: [srcRoot, "node_modules"],
+    extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js',
+      '@': srcRoot
     }
   },
   module: {
     rules: [
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf|mp4|webm|ogg|mp3|wav|flac|aac)$/,
         use: [
-          'file-loader'
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: isDevMode ? '[name].[ext]' : `${buildConfig.staticName}/[name].[hash:7].[ext]`
+            }
+          }
         ]
       },
       {
@@ -53,7 +59,11 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-syntax-dynamic-import']
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              '@babel/plugin-syntax-dynamic-import',
+              '@babel/plugin-proposal-object-rest-spread',
+            ]
           }
         },
         exclude: /node_modules/
@@ -66,11 +76,19 @@ module.exports = {
         ]
       },
       {
-        test: /\.less/,
+        test: /\.less$/,
         use: [
           isDevMode ? "style-loader": MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader'
+        ]
+      },
+      {
+        test: /\.scss/,
+        use: [
+          isDevMode ? "style-loader": MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
         ]
       },
       {
@@ -84,7 +102,11 @@ module.exports = {
                   loader: 'babel-loader',
                   options: {
                     presets: ['@babel/preset-env'],
-                    plugins: ['@babel/plugin-syntax-dynamic-import']
+                    plugins: [
+                      '@babel/plugin-syntax-dynamic-import',
+                      '@babel/plugin-proposal-object-rest-spread',
+                      '@babel/plugin-transform-runtime'
+                    ]
                   }
                 }
               ],
