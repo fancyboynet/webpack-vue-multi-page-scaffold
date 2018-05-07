@@ -11,7 +11,7 @@ let pageRoot = path.join(srcRoot, './page')
 let staticRoot = path.join(srcRoot, './static')
 let hasStaticRoot = fs.existsSync(staticRoot)
 let entry = {
-  vendor: ['vue', 'vue-router']
+  vendor: buildConfig.vendor
 }
 let plugins = hasStaticRoot ? [
   new CopyWebpackPlugin([ { from: staticRoot, to: `${buildConfig.staticName}` } ])

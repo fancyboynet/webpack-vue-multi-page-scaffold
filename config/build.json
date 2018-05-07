@@ -2,18 +2,7 @@
   "outputName": "dist",
   "staticName": "static",
   "templateName": "view",
+  "vendor": ["vue"],
   "host": "localhost",
-  "port": 8081,
-  "production": {
-    "server": "http://10.0.2.121:8090/",
-    "api": "http://10.0.2.121:8090/"
-  },
-  "testing": {
-    "server": "http://10.0.2.121:8090/",
-    "api": "http://10.0.2.121:8090"
-  },
-  "development": {
-    "server": "http://10.0.2.121:8090/",
-    "api": "/api"
-  }
+  "port": 8081
 }

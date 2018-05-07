@@ -1,17 +1,9 @@
-# 基于webpack纯静态多页面解决方案
+# webpack + vue 纯静态多页面解决方案
 框架主要实现前端开发中最常用的基础功能，方便扩展。
-和[fis推荐目录](https://github.com/fex-team/fis3-solutions/blob/master/intro.md#目录规范-1)不同的是，这里没有规定具体的widget目录，只约定主要的page目录。
 
-## 参考
-1. [fis3](http://fex-team.github.io/fis3/index.html)
-2. [基于fis3的PC端纯静态解决方案](https://github.com/fancyboynet/fis3-www-demo)
-
-## 实现的功能
-1. 自动刷新
+## 主要功能
+1. 自动刷新/热更新
 2. 数据模拟
-3. es6/7语法
-4. css-loader
-5. file-loader
 
 ## todo (欢迎pr)
 1. 单元测试
@@ -68,7 +60,7 @@
 ## 安装
 
 ```
-$ npm install
+$ npm i
     
 ```
 
@@ -132,6 +124,3 @@ axios.get('/data').then(data => {
   console.log(data)
 })
 ```
-
-## 单页应用
-1. Vue.js 请切换到vue分支
