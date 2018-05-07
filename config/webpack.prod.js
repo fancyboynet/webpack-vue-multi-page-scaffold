@@ -11,8 +11,13 @@ const buildConfig = require('./build')
 module.exports = merge(common, {
   optimization: {
     splitChunks: {
-      chunks: 'all',
-      name: 'common'
+      cacheGroups: {
+        commons: {
+          test: 'vendor',
+          name: "vendor",
+          chunks: "all"
+        }
+      }
     },
     runtimeChunk: {
       name: 'runtime'
