@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackIncludeFilePlugin = require('html-webpack-include-file-plugin')
 const buildConfig = require('./build')
 const isDevMode = process.env.NODE_ENV !== 'production'
 let srcRoot = path.join(process.cwd(), './src')
@@ -32,6 +33,9 @@ pages.map((v, i) => {
     template: `${pageRoot}/${v}/index.html`
   }))
 })
+
+plugins.push(new HtmlWebpackIncludeFilePlugin())
+
 module.exports = {
   entry: entry,
   plugins: plugins,
@@ -74,7 +78,10 @@ module.exports = {
             ]
           }
         },
-        exclude: /node_modules\/(?!iggfe-).*/
+        include: [
+          srcRoot,
+          /node_modules\/iggfe/
+        ]
       },
       {
         test: /\.css$/,
