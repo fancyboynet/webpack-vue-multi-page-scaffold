@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackIncludeFilePlugin = require('html-webpack-include-file-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const buildConfig = require('./build')
 const isDevMode = process.env.NODE_ENV !== 'production'
 let srcRoot = path.join(process.cwd(), './src')
@@ -35,6 +36,7 @@ pages.map((v, i) => {
 })
 
 plugins.push(new HtmlWebpackIncludeFilePlugin())
+plugins.push(new VueLoaderPlugin())
 
 module.exports = {
   entry: entry,
@@ -117,39 +119,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              js: [
-                {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: ['@babel/preset-env'],
-                    plugins: [
-                      '@babel/plugin-syntax-dynamic-import',
-                      '@babel/plugin-proposal-object-rest-spread',
-                      '@babel/plugin-transform-runtime'
-                    ]
-                  }
-                }
-              ],
-              css: [
-                isDevMode ? "style-loader": MiniCssExtractPlugin.loader,
-                'css-loader',
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    ident: 'postcss',
-                    plugins: () => [
-                      require('autoprefixer')()
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        }
+        loader: 'vue-loader'
       }
     ]
   }
