@@ -12,13 +12,11 @@ let srcRoot = path.join(process.cwd(), './src')
 let pageRoot = path.join(srcRoot, './page')
 let staticRoot = path.join(srcRoot, './static')
 let hasStaticRoot = fs.existsSync(staticRoot)
+
 let entry = {
   vendor: buildConfig.vendor
 }
-let plugins = hasStaticRoot ? [
-  new CopyWebpackPlugin([ { from: staticRoot, to: `${buildConfig.staticName}` } ])
-] : []
-
+let plugins = []
 let pages = fs.readdirSync(pageRoot)
 
 // 遍历pages目录
@@ -31,12 +29,22 @@ pages.map((v, i) => {
   plugins.push(new HtmlWebpackPlugin({
     chunks: ['runtime', 'vendor', v],
     filename: isDevMode ? `${v}.html` : `${buildConfig.templateName}/${v}.html`,
-    template: `${pageRoot}/${v}/index.html`
+    template: `${pageRoot}/${v}/index.html`,
+    minify: isDevMode ? false : {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    }
   }))
 })
-
-plugins.push(new HtmlWebpackIncludeFilePlugin())
+if(hasStaticRoot){
+  plugins.push(new CopyWebpackPlugin([ { from: staticRoot, to: `${buildConfig.staticName}` } ]))
+}
 plugins.push(new VueLoaderPlugin())
+plugins.push(new HtmlWebpackIncludeFilePlugin())
+// plugins.push(new webpack.HashedModuleIdsPlugin())
+
+
 
 module.exports = {
   entry: entry,
