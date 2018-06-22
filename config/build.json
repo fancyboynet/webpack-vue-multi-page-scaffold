@@ -2,7 +2,7 @@
   "outputName": "dist",
   "staticName": "static",
   "templateName": "view",
-  "publicPath": "",
+  "publicPath": "/",
   "vendor": ["vue"],
   "host": "localhost",
   "port": 8081

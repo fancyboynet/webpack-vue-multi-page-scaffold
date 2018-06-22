@@ -23,13 +23,12 @@ let config = merge(common, {
     }),
     new FriendlyErrorsWebpackPlugin({
       compilationSuccessInfo: {
-        messages: [`Your application is running here: http://${buildConfig.host}:${buildConfig.port}${buildConfig.publicPath}/app.html`],
+        messages: [`Your application is running here: http://${buildConfig.host}:${buildConfig.port}${buildConfig.publicPath}app.html`],
       }
     })
   ],
   devtool: 'inline-source-map',
   output: {
-    publicPath: '/',
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, `../${buildConfig.outputName}`)
