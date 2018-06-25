@@ -3,6 +3,7 @@
   "staticName": "static",
   "templateName": "view",
   "publicPath": "/",
+  "includePage": [],
   "vendor": ["vue"],
   "host": "localhost",
   "port": 8081
