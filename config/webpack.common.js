@@ -8,6 +8,8 @@ const HtmlWebpackIncludeFilePlugin = require('html-webpack-include-file-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const buildConfig = require('./build')
 const isDevMode = process.env.NODE_ENV !== 'production'
+const isNoHash = !!process.env.NO_HASH_ENV
+
 let srcRoot = path.join(process.cwd(), './src')
 let pageRoot = path.join(srcRoot, './page')
 let staticRoot = path.join(srcRoot, './static')
@@ -80,7 +82,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10000,
-              name: isDevMode ? '[name].[ext]' : `${buildConfig.staticName}/[name].[hash:7].[ext]`
+              name: isDevMode ? '[name].[ext]' : (isNoHash ? `${buildConfig.staticName}/[name].[ext]` : `${buildConfig.staticName}/[name].[hash:${buildConfig.hashLength}].[ext]`)
             }
           }
         ]

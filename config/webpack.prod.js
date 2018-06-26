@@ -2,11 +2,11 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const common = require('./webpack.common.js')
 const buildConfig = require('./build')
+const isNoHash = !!process.env.NO_HASH_ENV
 
 module.exports = merge(common, {
   optimization: {
@@ -28,9 +28,6 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(buildConfig.outputName, {
-      root: process.cwd()
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': '"production"'
@@ -38,12 +35,13 @@ module.exports = merge(common, {
     }),
     new MiniCssExtractPlugin({
       filename: `${buildConfig.staticName}/[name].css`,
-      chunkFilename: `${buildConfig.staticName}/[name].[chunkhash:7].css`
+      chunkFilename: isNoHash ? `${buildConfig.staticName}/[name].css` : `${buildConfig.staticName}/[name].[chunkhash:${buildConfig.hashLength}].css`
     })
   ],
   output: {
+    publicPath: buildConfig.staticPath,
     filename: `${buildConfig.staticName}/[name].bundle.js`,
-    chunkFilename: `${buildConfig.staticName}/[name].[chunkhash:7].bundle.js`,
+    chunkFilename: isNoHash ? `${buildConfig.staticName}/[name].bundle.js` : `${buildConfig.staticName}/[name].[chunkhash:${buildConfig.hashLength}].bundle.js`,
     path: path.resolve(__dirname, `../${buildConfig.outputName}`)
   }
 })

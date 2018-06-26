@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div class="page">
         <router-link to="/b">跳到B页</router-link>
         <div>scss test</div>
+        <i class="iconfont">&#xe600;</i>
     </div>
 </template>
 
@@ -9,8 +10,9 @@
 export default {}
 </script>
 
-<style lang="scss">
-    div{
+<style lang="scss" scoped>
+    .page{
+        background: url("~assert/bg.png") no-repeat;
         div{
             color: red;
         }
