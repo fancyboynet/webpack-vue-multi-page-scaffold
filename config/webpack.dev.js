@@ -29,6 +29,7 @@ let config = merge(common, {
   ],
   devtool: 'inline-source-map',
   output: {
+    publicPath: buildConfig.staticPath,
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, `../${buildConfig.outputName}`)
