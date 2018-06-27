@@ -7,6 +7,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackIncludeFilePlugin = require('html-webpack-include-file-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const buildConfig = require('./build')
+const pages = require('./pages')
+
 const isDevMode = process.env.NODE_ENV !== 'production'
 const isNoHash = !!process.env.NO_HASH_ENV
 
@@ -19,28 +21,13 @@ let entry = {
   vendor: buildConfig.vendor
 }
 let plugins = []
-let pages = fs.readdirSync(pageRoot)
-
-function isIncludePage(pageName){
-  if(!buildConfig.includePage || !buildConfig.includePage.length){
-    return true
-  }
-  return buildConfig.includePage.includes(pageName)
-}
 
 // 遍历pages目录
 pages.map((v, i) => {
-  let stat = fs.statSync(path.join(pageRoot, v))
-  if (!stat.isDirectory()) {
-    return
-  }
-  if(!isIncludePage(v)){
-    return
-  }
   entry[v] = `${pageRoot}/${v}/index.js`
   plugins.push(new HtmlWebpackPlugin({
     chunks: ['runtime', 'vendor', v],
-    filename: isDevMode ? `${v}/index.html` : `${buildConfig.templateName}/${v}.html`,
+    filename: isDevMode ? `${v}.html` : `${buildConfig.templateName}/${v}.html`,
     template: `${pageRoot}/${v}/index.html`,
     minify: isDevMode ? false : {
       removeComments: true,
