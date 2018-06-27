@@ -26,6 +26,7 @@ let plugins = []
 pages.map((v, i) => {
   entry[v] = `${pageRoot}/${v}/index.js`
   plugins.push(new HtmlWebpackPlugin({
+    publicPath: true,
     chunks: ['runtime', 'vendor', v],
     filename: isDevMode ? `${v}.html` : `${buildConfig.templateName}/${v}.html`,
     template: `${pageRoot}/${v}/index.html`,
