@@ -40,7 +40,7 @@ pages.map((v, i) => {
   entry[v] = `${pageRoot}/${v}/index.js`
   plugins.push(new HtmlWebpackPlugin({
     chunks: ['runtime', 'vendor', v],
-    filename: isDevMode ? `${v}.html` : `${buildConfig.templateName}/${v}.html`,
+    filename: isDevMode ? `${v}/index.html` : `${buildConfig.templateName}/${v}.html`,
     template: `${pageRoot}/${v}/index.html`,
     minify: isDevMode ? false : {
       removeComments: true,
