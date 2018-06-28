@@ -19,8 +19,8 @@
   Vue.use(VueRouter)
 
   const router = new VueRouter({
-    base:'/app2/',
-    mode:'history',
+    base: '/app2/',
+    mode: 'history',
     routes: ROUTES
   })
 
@@ -32,7 +32,6 @@
       }
     }
   }
-
 </script>
 
 <style>
@@ -68,5 +67,4 @@
         opacity: 0;
         transform: translate(-30px, 0);
     }
-
 </style>

@@ -37,20 +37,18 @@ pages.map((v, i) => {
     }
   }))
 })
-if(hasStaticRoot){
-  plugins.push(new CopyWebpackPlugin([ { from: staticRoot, to: `${buildConfig.staticName}` } ]))
+if (hasStaticRoot) {
+  plugins.push(new CopyWebpackPlugin([{from: staticRoot, to: `${buildConfig.staticName}`}]))
 }
 plugins.push(new VueLoaderPlugin())
 plugins.push(new HtmlWebpackIncludeFilePlugin())
 // plugins.push(new webpack.HashedModuleIdsPlugin())
 
-
-
 module.exports = {
   entry: entry,
   plugins: plugins,
   resolve: {
-    modules: [srcRoot, "node_modules"],
+    modules: [srcRoot, 'node_modules'],
     extensions: ['.js', '.vue', '.json'],
     alias: {
       vue: 'vue/dist/vue.js',
@@ -77,7 +75,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: {
+        use: [{
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
@@ -87,7 +85,12 @@ module.exports = {
               '@babel/plugin-proposal-object-rest-spread',
             ]
           }
-        },
+        }].concat(buildConfig.openStandardJs ? [{
+          loader: 'standard-loader',
+          options: {
+            parser: 'babel-eslint'
+          }
+        }] : []),
         include: [
           srcRoot,
           /node_modules\/iggfe/
@@ -96,7 +99,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          isDevMode ? "style-loader": MiniCssExtractPlugin.loader,
+          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -112,7 +115,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          isDevMode ? "style-loader": MiniCssExtractPlugin.loader,
+          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader'
         ]
@@ -120,7 +123,7 @@ module.exports = {
       {
         test: /\.scss/,
         use: [
-          isDevMode ? "style-loader": MiniCssExtractPlugin.loader,
+          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
