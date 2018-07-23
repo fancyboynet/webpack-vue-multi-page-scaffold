@@ -12,7 +12,7 @@ export default {}
 
 <style lang="scss" scoped>
     .page{
-        background: url("~assert/bg.png") no-repeat;
+        background: url("~assets/bg.png") no-repeat;
         div{
             color: red;
         }
