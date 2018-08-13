@@ -75,6 +75,9 @@
     "last 2 versions"
   ],
   "eslintConfig": {
+    "env": {
+      "browser": false
+    },
     "parserOptions": {
       "parser": "babel-eslint",
       "sourceType": "module"
