@@ -86,19 +86,7 @@ module.exports = {
               '@babel/plugin-proposal-object-rest-spread',
             ]
           }
-        }].concat(buildConfig.openStandardJs ? [{
-          loader: 'eslint-loader',
-          options: {
-            "parserOptions": {
-              "parser": "babel-eslint",
-              "sourceType": "module"
-            },
-            "extends": [
-              "plugin:vue/recommended",
-              "standard"
-            ]
-          }
-        }] : []),
+        }].concat(buildConfig.openStandardJs ? ['eslint-loader'] : []),
         include: [
           srcRoot
         ]
@@ -137,19 +125,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader'].concat(buildConfig.openStandardJs ? [{
-          loader: 'eslint-loader',
-          options: {
-            "parserOptions": {
-              "parser": "babel-eslint",
-              "sourceType": "module"
-            },
-            "extends": [
-              "plugin:vue/recommended",
-              "standard"
-            ]
-          }
-        }] : [])
+        use: ['vue-loader'].concat(buildConfig.openStandardJs ? ['eslint-loader'] : [])
       }
     ]
   }
