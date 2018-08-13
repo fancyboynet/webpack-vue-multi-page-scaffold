@@ -2,9 +2,9 @@ import 'assets/reset.less'
 import Vue from 'vue'
 import App from './app.vue'
 const app = new Vue({
-  template: '<App/>',
   components: {
     App
-  }
+  },
+  template: '<App/>'
 })
 app.$mount('#app')

@@ -1,37 +1,43 @@
 <template>
-    <div style="position: absolute;top: 0;left:0;right:0;bottom:0;">
-        <transition :name="transitionName">
-            <keep-alive>
-                <router-view class="child-view" v-if="$route.meta.keepAlive"></router-view>
-            </keep-alive>
-        </transition>
-        <transition :name="transitionName">
-            <router-view class="child-view" v-if="!$route.meta.keepAlive"></router-view>
-        </transition>
-    </div>
+  <div style="position: absolute;top: 0;left:0;right:0;bottom:0;">
+    <transition :name="transitionName">
+      <keep-alive>
+        <router-view
+          v-if="$route.meta.keepAlive"
+          class="child-view"
+        />
+      </keep-alive>
+    </transition>
+    <transition :name="transitionName">
+      <router-view
+        v-if="!$route.meta.keepAlive"
+        class="child-view"
+      />
+    </transition>
+  </div>
 </template>
 
 <script>
-  import Vue from 'vue'
-  import VueRouter from 'vue-router'
-  import ROUTES from './routes'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import ROUTES from './routes'
 
-  Vue.use(VueRouter)
+Vue.use(VueRouter)
 
-  const router = new VueRouter({
-    base: '/app2/',
-    mode: 'history',
-    routes: ROUTES
-  })
+const router = new VueRouter({
+  base: '/app2/',
+  mode: 'history',
+  routes: ROUTES
+})
 
-  export default {
-    router,
-    data () {
-      return {
-        transitionName: 'slide-left'
-      }
+export default {
+  router,
+  data () {
+    return {
+      transitionName: 'slide-left'
     }
   }
+}
 </script>
 
 <style>

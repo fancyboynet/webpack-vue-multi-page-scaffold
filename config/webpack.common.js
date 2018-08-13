@@ -87,14 +87,20 @@ module.exports = {
             ]
           }
         }].concat(buildConfig.openStandardJs ? [{
-          loader: 'standard-loader',
+          loader: 'eslint-loader',
           options: {
-            parser: 'babel-eslint'
+            "parserOptions": {
+              "parser": "babel-eslint",
+              "sourceType": "module"
+            },
+            "extends": [
+              "plugin:vue/recommended",
+              "standard"
+            ]
           }
         }] : []),
         include: [
-          srcRoot,
-          /node_modules\/iggfe/
+          srcRoot
         ]
       },
       {
@@ -131,7 +137,19 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        use: ['vue-loader'].concat(buildConfig.openStandardJs ? [{
+          loader: 'eslint-loader',
+          options: {
+            "parserOptions": {
+              "parser": "babel-eslint",
+              "sourceType": "module"
+            },
+            "extends": [
+              "plugin:vue/recommended",
+              "standard"
+            ]
+          }
+        }] : [])
       }
     ]
   }
