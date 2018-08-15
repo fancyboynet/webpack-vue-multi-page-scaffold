@@ -11,6 +11,7 @@ const pages = require('./pages')
 
 const isDevMode = process.env.NODE_ENV !== 'production'
 const isNoHash = !!process.env.NO_HASH_ENV
+const needEslint = isDevMode && buildConfig.openStandardJs
 
 let srcRoot = path.join(process.cwd(), './src')
 let pageRoot = path.join(srcRoot, './page')
@@ -86,7 +87,7 @@ module.exports = {
               '@babel/plugin-proposal-object-rest-spread',
             ]
           }
-        }].concat(buildConfig.openStandardJs ? ['eslint-loader'] : []),
+        }].concat(needEslint ? ['eslint-loader'] : []),
         include: [
           srcRoot
         ]
@@ -125,7 +126,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader'].concat(buildConfig.openStandardJs ? ['eslint-loader'] : [])
+        use: ['vue-loader'].concat(needEslint ? ['eslint-loader'] : [])
       }
     ]
   }
