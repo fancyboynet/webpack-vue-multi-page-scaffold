@@ -10,5 +10,6 @@
   "host": "localhost",
   "port": 8081,
   "openStandardJs": true,
-  "pageTemplateWithoutHtmlLoader": false
+  "pageTemplateWithoutHtmlLoader": false,
+  "reInstallOnPkgChange": true
 }
