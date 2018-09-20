@@ -21,8 +21,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ROUTES from './routes'
+
 Vue.use(VueRouter)
+
 const router = new VueRouter({
+  base: '/app/',
+  mode: 'history',
   routes: ROUTES
 })
 
@@ -34,7 +38,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
@@ -70,5 +73,4 @@ export default {
         opacity: 0;
         transform: translate(-30px, 0);
     }
-
 </style>
