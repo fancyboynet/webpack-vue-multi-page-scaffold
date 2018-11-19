@@ -29,7 +29,7 @@ pages.map((v, i) => {
   plugins.push(new HtmlWebpackPlugin({
     publicPath: true,
     chunks: ['runtime', 'vendor', v],
-    filename: isDevMode ? `${v}.html` : `${buildConfig.templateName}/${v}.html`,
+    filename: isDevMode ? `${v}.html` : `${buildConfig.templateName ? buildConfig.templateName + '/' : ''}${v}.html`,
     template: `${pageRoot}/${v}/index.html`,
     minify: isDevMode ? false : {
       removeComments: true,
