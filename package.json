@@ -46,7 +46,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-include-file-plugin": "0.0.1",
     "html-webpack-plugin": "^3.2.0",
-    "husky": "^1.0.0-rc.13",
+    "husky": "^1.2.0",
     "install": "^0.11.0",
     "ip": "^1.1.5",
     "less": "^3.0.2",
@@ -93,8 +93,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "post-merge": "node ./script/check-package.js",
-      "post-checkout": "node ./script/check-package.js"
+      "post-merge": "cross-env FORCE_COLOR=1 node ./script/check-package.js",
+      "post-checkout": "cross-env FORCE_COLOR=1 node ./script/check-package.js"
     }
   }
 }
