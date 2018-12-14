@@ -52,7 +52,7 @@ module.exports = {
     modules: [srcRoot, 'node_modules'],
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue: 'vue/dist/vue.js',
+      vue: isDevMode ? 'vue/dist/vue.js' : 'vue/dist/vue.min.js',
       '@': srcRoot
     }
   },
