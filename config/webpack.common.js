@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackIncludeFilePlugin = require('html-webpack-include-file-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const buildConfig = require('./build')
 const pages = require('./pages')
@@ -42,7 +41,6 @@ if (hasStaticRoot) {
   plugins.push(new CopyWebpackPlugin([{from: staticRoot, to: `${buildConfig.staticName}`}]))
 }
 plugins.push(new VueLoaderPlugin())
-plugins.push(new HtmlWebpackIncludeFilePlugin())
 // plugins.push(new webpack.HashedModuleIdsPlugin())
 
 module.exports = {
