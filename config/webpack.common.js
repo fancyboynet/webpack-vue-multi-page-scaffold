@@ -17,10 +17,12 @@ let pageRoot = path.join(srcRoot, './page')
 let staticRoot = path.join(srcRoot, './static')
 let hasStaticRoot = fs.existsSync(staticRoot)
 
-let entry = {
-  vendor: buildConfig.vendor
-}
+let entry = {}
 let plugins = []
+
+if (buildConfig.vendor.length) {
+  entry['vendor'] = buildConfig.vendor
+}
 
 // 遍历pages目录
 pages.map((v, i) => {
