@@ -1,6 +1,8 @@
 <template>
   <div class="page">
-    <router-link to="/b">跳到B页</router-link>
+    <router-link to="/b">
+      跳到B页
+    </router-link>
     <div>scss test</div>
     <i class="iconfont">&#xe600;</i>
   </div>
