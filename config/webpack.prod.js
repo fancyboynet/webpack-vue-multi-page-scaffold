@@ -34,7 +34,7 @@ module.exports = merge(common, {
           }
         }
       }),
-      new OptimizeCssAssetsPlugin({})
+      new OptimizeCssAssetsPlugin()
     ]
   },
   plugins: [
