@@ -6,8 +6,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const common = require('./webpack.common.js')
 const buildConfig = require('./build')
-const isNoHash = !!process.env.NO_HASH_ENV
-const isCDN = !!process.env.CDN_ENV
+const isNoHash = process.env.NO_HASH_ENV === 'true'
+const isCDN = process.env.CDN_ENV === 'true'
 
 module.exports = merge(common, {
   optimization: {
