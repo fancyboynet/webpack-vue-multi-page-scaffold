@@ -68,7 +68,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10000,
+              limit: 8192,
               context: srcRoot,
               name: isDevMode ? '[path][name].[ext]' : (isNoHash ? `${buildConfig.staticName}/[path][name].[ext]` : `${buildConfig.staticName}/[name].[hash:${buildConfig.hashLength}].[ext]`)
             }
