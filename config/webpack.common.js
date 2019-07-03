@@ -81,17 +81,20 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: [
-              '@babel/plugin-transform-runtime',
-              '@babel/plugin-syntax-dynamic-import',
-              '@babel/plugin-proposal-object-rest-spread',
-            ]
+        use: [
+          'cache-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: [
+                '@babel/plugin-transform-runtime',
+                '@babel/plugin-syntax-dynamic-import',
+                '@babel/plugin-proposal-object-rest-spread',
+              ]
+            }
           }
-        }].concat(needEslint ? ['eslint-loader'] : []),
+        ].concat(needEslint ? ['eslint-loader'] : []),
         include: [
           srcRoot
         ]
@@ -130,7 +133,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader'].concat(needEslint ? ['eslint-loader'] : [])
+        use: ['cache-loader', 'vue-loader'].concat(needEslint ? ['eslint-loader'] : [])
       }
     ]
   }
